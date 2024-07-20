@@ -28,6 +28,22 @@ monthly_challenges = {
 # def march(request):
 #   return HttpResponse("Learn React.js daily for atleast 30 minuts")
 
+
+def index(request):
+  list_items = ""
+  months = list(monthly_challenges.keys())
+
+  for month in months:
+    month_path = reverse("month_challenge", args=[month])
+    list_items += f"<li><a href=\"{month_path}\">{month.capitalize()}</a></li>"
+  # response_data = """
+  #   <ul>
+  #     <li><a href="/challenges/january">January</a></li>
+  #   </ul>
+  # """
+  response_data = f"<ul><h1>{list_items}</h1></ul>"
+  return HttpResponse(response_data)
+
 def monthly_challenge_by_number(request, month):
   months = list(monthly_challenges.keys())
 
@@ -55,7 +71,8 @@ def monthly_challenge_by_number(request, month):
 def monthly_challenge(request, month):
   try:
     challenge_text = monthly_challenges[month]
-    return HttpResponse(challenge_text)
+    response_data = f"<h1>{challenge_text}</h1>"
+    return HttpResponse(response_data)
   except:
-    return HttpResponseNotFound("This month is not supported")
+    return HttpResponseNotFound("<h1>This month is not supported</h1>")
   
