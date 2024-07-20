@@ -1,0 +1,16 @@
+
+
+{% extends "layout.html" %}
+
+{% block page_title %}{{month_name|title}}{% endblock  %}
+
+{% block content %}
+    {% include "challenges/partials/header.html" %}
+    <h1>{{month_name|title}} Challenge </h1>
+    {% if text is not None%}
+        <h2>{{ text }}</h2>
+    {% else %}
+        <p>No Challenge for this month right now!</p>
+    {% endif %} 
+{% endblock  %}
+
